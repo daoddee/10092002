@@ -139,7 +139,7 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    const FORM_ENDPOINT = "https://formspree.io/f/mrbyqqek"; // <-- put your ID
+    const FORM_ENDPOINT = "https://formspree.io/f/mrbyqqek"; // your Formspree ID
 
     const form = document.getElementById("waitlist-form");
     const btn = document.getElementById("submit-btn");
@@ -158,7 +158,8 @@
       const useCase = document.getElementById("useCase").value;
       const consent = document.getElementById("consent").checked;
 
-      if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+      // ✅ fixed regex (single backslashes)
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         errorBox.textContent = "Please enter a valid email.";
         errorBox.style.display = "block";
         return;
@@ -173,7 +174,10 @@
       try {
         const res = await fetch(FORM_ENDPOINT, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
           body: JSON.stringify({ email, name, useCase, consent })
         });
         if (!res.ok) throw new Error("Submission failed");
