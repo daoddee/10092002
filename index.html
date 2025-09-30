@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Abaqus Scripting AI — Waitlist</title>
+  <meta name="description" content="Join the waitlist for the Abaqus scripting AI assistant." />
+  <style>
+    :root { --bg:#0a0a0a; --card:#121212; --muted:#cbd5e1; --text:#fff; --accent:#22d3ee; --accent-2:#d946ef; }
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue","Noto Sans",sans-serif}
+    a{color:inherit}
+    .container{max-width:960px;margin:0 auto;padding:24px}
+    .nav{display:flex;justify-content:space-between;align-items:center;padding:12px 0}
+    .logo{display:flex;align-items:center;gap:10px}
+    .chip{display:inline-flex;gap:8px;align-items:center;border:1px solid #ffffff1a;background:#ffffff0d;padding:6px 10px;border-radius:999px;color:#ffffffb3;font-size:12px}
+    .hero{padding:64px 0;text-align:center;position:relative;overflow:hidden}
+    .blur1,.blur2{position:absolute;filter:blur(64px);opacity:.25;z-index:0}
+    .blur1{top:-60px;left:-60px;width:300px;height:300px;background:var(--accent)}
+    .blur2{bottom:-80px;right:-80px;width:360px;height:360px;background:var(--accent-2)}
+    .hero h1{margin:16px 0 8px;font-size:40px}
+    .muted{color:#ffffffb3}
+    .card{max-width:520px;margin:24px auto;padding:20px;border-radius:16px;background:#ffffff0d;border:1px solid #ffffff1a;backdrop-filter:blur(6px)}
+    input,select{width:100%;background:#0f1012;color:#fff;border:1px solid #ffffff1a;border-radius:12px;padding:12px 14px;font-size:14px;outline:none}
+    input:focus,select:focus{border-color:var(--accent)}
+    .row{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;text-align:left}
+    .checkbox{display:flex;gap:10px;align-items:flex-start;font-size:12px;color:#ffffffb3}
+    .btn{display:inline-flex;gap:8px;align-items:center;justify-content:center;width:100%;padding:12px 14px;border-radius:12px;background:var(--accent);color:#0a0a0a;font-weight:600;border:none;cursor:pointer}
+    .btn[disabled]{opacity:.6;cursor:not-allowed}
+    .error{border:1px solid #fca5a5;background:#7f1d1d33;color:#fecaca;padding:10px 12px;border-radius:10px;font-size:14px}
+    .success{color:#34d399;font-weight:600}
+    .grid{display:grid;gap:16px}
+    @media(min-width:640px){.features{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:1024px){.features{grid-template-columns:repeat(3,1fr)}}
+    .tile{border:1px solid #ffffff1a;background:#ffffff0d;border-radius:16px;padding:16px;text-align:left}
+    .footer{border-top:1px solid #ffffff1a;color:#ffffff80;padding:20px 0;font-size:12px;margin-top:40px}
+    .sp{width:20px;height:20px;border:3px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin .9s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="blur1"></div><div class="blur2"></div>
+    <div class="container">
+      <div class="nav">
+        <div class="logo">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path d="M4 17L12 3l8 14-8 4-8-4Z" fill="#22d3ee"></path>
+          </svg>
+          <strong>Abaqus Scripting AI</strong>
+        </div>
+        <div class="muted" style="font-size:13px;">Private Beta</div>
+      </div>
+
+      <h1>Ship Abaqus models from prompts.</h1>
+      <p class="muted">Natural-language to Abaqus Python. Mesh, BCs, materials, steps — generated in seconds. Join the waitlist.</p>
+
+      <div class="card" id="form-card">
+        <form id="waitlist-form" class="grid" aria-label="Waitlist form">
+          <div class="row">
+            <label for="email" class="muted" style="font-size:12px">Work email</label>
+            <input id="email" name="email" type="email" placeholder="name@company.com" required />
+          </div>
+          <div class="row">
+            <label for="name" class="muted" style="font-size:12px">Name (optional)</label>
+            <input id="name" name="name" type="text" placeholder="Jane Doe" />
+          </div>
+          <div class="row">
+            <label for="useCase" class="muted" style="font-size:12px">Primary use case</label>
+            <select id="useCase" name="useCase" required>
+              <option value="" disabled selected>Select one…</option>
+              <option>FE pre-processing automation</option>
+              <option>Post-processing & reporting</option>
+              <option>Parametric studies & DOE</option>
+              <option>Material/section libraries</option>
+              <option>Teaching & training</option>
+            </select>
+          </div>
+          <label class="checkbox">
+            <input id="consent" type="checkbox" /> I consent to receive early-access updates.
+          </label>
+          <div id="error" class="error" style="display:none"></div>
+          <button class="btn" id="submit-btn" type="submit">
+            <span id="btn-text">Join the waitlist</span>
+            <span id="spinner" class="sp" style="display:none"></span>
+          </button>
+          <p style="font-size:12px;color:#ffffff80">By signing up, you agree to our Terms & Privacy Policy.</p>
+        </form>
+        <div id="success" class="success" style="display:none">Thanks! You’re on the waitlist.</div>
+      </div>
+
+      <p class="muted" style="margin-top:18px;font-size:11px;letter-spacing:.15em;text-transform:uppercase">Trusted by engineers from</p>
+      <div class="container" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;opacity:.75">
+        <span class="chip"><span style="width:8px;height:8px;background:#fff;border-radius:50%"></span>Aerospace R&D</span>
+        <span class="chip"><span style="width:8px;height:8px;background:#fff;border-radius:50%"></span>Automotive CAE</span>
+        <span class="chip"><span style="width:8px;height:8px;background:#fff;border-radius:50%"></span>Energy</span>
+        <span class="chip"><span style="width:8px;height:8px;background:#fff;border-radius:50%"></span>Academia</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <section class="features grid">
+      <div class="tile">
+        <h3>Prompt → Script</h3>
+        <p class="muted">Generate clean Abaqus Python with sets, surfaces, materials, and steps.</p>
+      </div>
+      <div class="tile">
+        <h3>Guardrails built-in</h3>
+        <p class="muted">RESULT summaries, safety filters and reproducible outputs.</p>
+      </div>
+      <div class="tile">
+        <h3>Integrates anywhere</h3>
+        <p class="muted">CLI and REST API for CI pipelines, notebooks, or teaching labs.</p>
+      </div>
+    </section>
+
+    <section style="margin-top:24px">
+      <h3>How it works</h3>
+      <ol class="muted">
+        <li>1) Describe your model (geometry, mesh size, loads, BCs, materials).</li>
+        <li>2) Our agent compiles a safe, runnable Abaqus Python script.</li>
+        <li>3) (Optional) Execute headless via <code>abaqus cae noGUI=script.py</code>.</li>
+      </ol>
+    </section>
+
+    <footer class="footer">
+      <div class="container" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px">
+        <span>© <span id="year"></span> Abaqus Scripting AI</span>
+        <span>
+          <a href="#" class="muted">Privacy</a> ·
+          <a href="#" class="muted">Terms</a> ·
+          <a href="mailto:contact@example.com" class="muted">Contact</a>
+        </span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORMSPREE_ID_HERE"; // <-- put your ID
+
+    const form = document.getElementById("waitlist-form");
+    const btn = document.getElementById("submit-btn");
+    const spinner = document.getElementById("spinner");
+    const btnText = document.getElementById("btn-text");
+    const errorBox = document.getElementById("error");
+    const successBox = document.getElementById("success");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      errorBox.style.display = "none";
+      successBox.style.display = "none";
+
+      const email = document.getElementById("email").value.trim();
+      const name = document.getElementById("name").value.trim();
+      const useCase = document.getElementById("useCase").value;
+      const consent = document.getElementById("consent").checked;
+
+      if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+        errorBox.textContent = "Please enter a valid email.";
+        errorBox.style.display = "block";
+        return;
+      }
+      if (!consent) {
+        errorBox.textContent = "Please consent to receive updates.";
+        errorBox.style.display = "block";
+        return;
+      }
+
+      btn.disabled = true; spinner.style.display = "inline-block"; btnText.textContent = "Joining…";
+      try {
+        const res = await fetch(FORM_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, name, useCase, consent })
+        });
+        if (!res.ok) throw new Error("Submission failed");
+        successBox.style.display = "block";
+        form.reset();
+      } catch (err) {
+        errorBox.textContent = (err && err.message) || "Something went wrong.";
+        errorBox.style.display = "block";
+      } finally {
+        btn.disabled = false; spinner.style.display = "none"; btnText.textContent = "Join the waitlist";
+      }
+    });
+  </script>
+</body>
+</html>
